@@ -1,10 +1,17 @@
-﻿namespace GenericsBinaryTree
+﻿using GenericsBinaryTree.BinaryTree;
+
+namespace GenericsBinaryTree
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            //Node<int> root = new(4);
+            Tree<int> tree = new Tree<int>();
+
+
+            
+            Console.ReadLine();
         }
     }
 }

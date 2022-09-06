@@ -13,7 +13,12 @@ namespace GenericsBinaryTree.BinaryTree
 
         public IComparer<T> Comparer { get; }
 
-        public Tree(Node<T> root) :this(root, Comparer<T>.Default)
+        public Tree()
+        {
+            Root = null;
+            Comparer = Comparer<T>.Default;
+        }
+        public Tree(Node<T>? root) :this(root, Comparer<T>.Default)
         {
 
         }
@@ -22,6 +27,8 @@ namespace GenericsBinaryTree.BinaryTree
             Root = root;
             Comparer = comparer;
         }
+
+        
 
         public Node<T>? Search(T data)
         {
