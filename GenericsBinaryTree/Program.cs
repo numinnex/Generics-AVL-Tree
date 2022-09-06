@@ -15,10 +15,14 @@ namespace GenericsBinaryTree
             tree.Insert(5);
             tree.Insert(6);
 
-            tree.Root.PreOrderTraversal((Item) => Console.WriteLine(Item.Data));
+            //tree.Root.PreOrderTraversal((Item) => Console.WriteLine(Item.Data));
 
+            var output = tree.Root.InOrderTraversal();
 
-
+            foreach (var item in output)
+            {
+                Console.WriteLine(item.Data);
+            }
 
             Console.ReadLine();
         }
