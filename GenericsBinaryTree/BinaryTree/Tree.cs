@@ -59,6 +59,11 @@ namespace GenericsBinaryTree.BinaryTree
             return Root?.Minimum();
         }
 
+        public void Insert(T data)
+        {
+            Insert(new Node<T>(data));
+        }
+
         public void Insert(Node<T> node)
         {
             Node<T> parent = null;
