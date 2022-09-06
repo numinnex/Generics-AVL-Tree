@@ -14,16 +14,17 @@ namespace GenericsBinaryTree.BinaryTree
         public Node(T data)
         {
             Data = data;
-        }   
-      
+        }
 
-        public Node<T> ? Parent { get; set; }
+
+        public Node<T>? Parent { get; set; }
         public Node<T>? Left { get; set; }
         public Node<T>? Right { get; set; }
 
 
 
-        
 
 
+
+    }
 }

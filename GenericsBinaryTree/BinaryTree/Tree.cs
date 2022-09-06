@@ -27,10 +27,14 @@ namespace GenericsBinaryTree.BinaryTree
             Root = root;
             Comparer = comparer;
         }
+        public Tree(IEnumerable<T> values) : this(values, Comparer<T>.Default)
+        {
+
+        }
         public Tree(IEnumerable<T> values , IComparer<T> comparer)
         {
             Comparer = comparer;
-            Root = Balancing.GetBalancedTree(values.Select(v => new Node<T>(v)), comparer);
+            Root = Utility.CreateFromMultiple(values.Select(v => new Node<T>(v)), comparer);
         }
         
 
