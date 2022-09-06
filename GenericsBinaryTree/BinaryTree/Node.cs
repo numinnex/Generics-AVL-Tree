@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GenericsBinaryTree.BinaryTree
 {
@@ -20,7 +21,9 @@ namespace GenericsBinaryTree.BinaryTree
         public Node<T>? Left { get; set; }
         public Node<T>? Right { get; set; }
 
-    }
+
+
+        
 
 
 }

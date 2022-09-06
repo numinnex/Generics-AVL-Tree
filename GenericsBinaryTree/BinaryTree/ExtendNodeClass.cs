@@ -11,6 +11,20 @@
             }
             return current;
         }
+        public static int Depth<T>(this Node<T> tree)
+        {
+
+            if (tree != null)
+            {
+                int x = Depth(tree.Left);
+                int y = Depth(tree.Right);
+                if (x > y)
+                    return x + 1;
+                else
+                    return y + 1;
+            }
+            return 0;
+        }
 
         public static Node<T> Minimum<T>(this Node<T> tree)
         {
@@ -24,12 +38,12 @@
 
         public static Node<T> Successor<T>(this Node<T> node)
         {
-            if(node.Right != null)
+            if (node.Right != null)
                 return node.Right.Minimum();
 
             Node<T>? current = node.Parent;
 
-            while(current != null && node == current.Right)
+            while (current != null && node == current.Right)
             {
                 node = current;
                 current = current.Parent;
