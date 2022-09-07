@@ -13,10 +13,17 @@ namespace GenericsBinaryTree
 
 
 
-            Tree<int> tree = new Tree<int>(new int[] { 1, 2, 3, 4, 5 });
+            Tree<int> tree = new Tree<int>();
+            tree.Insert(1);
+            tree.Insert(2);
+            tree.Insert(3);
+            tree.Insert(4);
+            tree.Insert(5);
+            tree.Insert(6);
+
 
             tree.Root.PreOrderTraversal((Item) => Console.WriteLine(Item.Data));
-            Console.WriteLine(tree.Root.Depth());
+            Console.WriteLine($"Height - {tree.Root.Depth()}");
 
             Console.ReadLine();
         }

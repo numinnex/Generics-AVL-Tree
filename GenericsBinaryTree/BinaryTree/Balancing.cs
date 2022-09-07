@@ -8,7 +8,7 @@ namespace GenericsBinaryTree.BinaryTree
 {
     public static  class Balancing
     {
-
+        
         
     }
 }

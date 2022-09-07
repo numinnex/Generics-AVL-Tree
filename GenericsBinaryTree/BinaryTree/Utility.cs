@@ -25,6 +25,8 @@ namespace GenericsBinaryTree.BinaryTree
             return CreateFromMultipleNodes(NodesArray, 0 , NodesArray.Count - 1);
         }
 
+       
+
 
         private static Node<T>? CreateFromMultipleNodes<T>(IList<Node<T>> NodesArray, int start , int end)
         {
