@@ -11,9 +11,16 @@ namespace GenericsBinaryTree.BinaryTree
     public class Node<T>
     {
         public T Data { get; private set; }
+
         public Node(T data)
         {
             Data = data;
+        }
+
+        public Node(Node<T> parent , T data)
+        {
+            Data = data;
+            Parent = parent;
         }
 
 

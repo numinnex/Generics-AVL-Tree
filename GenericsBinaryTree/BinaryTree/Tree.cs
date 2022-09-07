@@ -69,35 +69,37 @@ namespace GenericsBinaryTree.BinaryTree
 
         public void Insert(T data)
         {
-            Insert(new Node<T>(data));
+            if (Root == null)
+            {
+                Root = new Node<T>(null, data);
+                return;
+            }
+                
+            Insert(Root , data);
         }
 
-        public void Insert(Node<T> node)
+        public void Insert(Node<T> node , T value)
         {
-            Node<T> parent = null;
-            Node<T> current = Root;
+            int compared = Comparer.Compare(node.Data, value);
 
-            while(current != null)
+            if(compared < 0)
             {
-                parent = current;
-                int compared = Comparer.Compare(node.Data, current.Data);
-
-                if (compared < 0)
-                    current = current.Left;
-                else if (compared > 0)
-                    current = current.Right;
+                if (node.Right == null)
+                    node.Right = new Node<T>(node ,value);
                 else
-                    throw new ArgumentException($"A node with this value {node.Data} already exists!");
+                    Insert(node.Right, value);
+            }    
+            else if(compared > 0)
+            {
+                if (node.Left == null)
+                    node.Left = new Node<T>(node, value);
+                else
+                    Insert(node.Left, value);
             }
-
-            node.Parent = parent;
-
-            if (parent == null)
-                Root = node;
-            else if (Comparer.Compare(node.Data, parent.Data) < 0)
-                parent.Left = node;
             else
-                parent.Right = node;
+                throw new Exception("Item exists");
+
+            //Balancing.Rebalance(node);
 
         }
         public void Replace(Node<T> node , Node<T>? replacer)
