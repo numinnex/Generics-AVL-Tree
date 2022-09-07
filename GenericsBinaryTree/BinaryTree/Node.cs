@@ -24,6 +24,7 @@ namespace GenericsBinaryTree.BinaryTree
             Parent = parent;
         }
 
+        public bool isLeaf => Left == null && Right == null;
 
         public Node<T>? Parent { get; set; }
         public Node<T>? Left { get; set; }

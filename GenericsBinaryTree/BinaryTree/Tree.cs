@@ -78,14 +78,14 @@
         {
             int compared = Comparer.Compare(node.Data, value);
 
-            if (compared < 0)
+            if (compared > 0)
             {
                 if (node.Right == null)
                     node.Right = new Node<T>(node, value);
                 else
                     Insert(node.Right, value);
             }
-            else if (compared > 0)
+            else if (compared < 0)
             {
                 if (node.Left == null)
                     node.Left = new Node<T>(node, value);
@@ -135,7 +135,7 @@
 
                 else
                 {
-                    rightRotate(node);
+                    rightRotate(node.Right);
                     leftRotate(node);
 
                 }
@@ -144,8 +144,8 @@
         }
         private void rightRotate(Node<T> node)
         {
-            Node<T> prevRoot = node;
-            Node<T> leftRightChild = prevRoot.Left.Right;
+            var prevRoot = node;
+            var leftRightChild = prevRoot.Left.Right;
 
             var newRoot = node.Left;
 
