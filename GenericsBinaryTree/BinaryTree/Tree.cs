@@ -4,7 +4,7 @@
     {
         public Node<T> Root { get; set; } = null;
 
-
+        public int Count => Root == null ? 0 : Root.Count;
 
 
         public IComparer<T> Comparer { get; }
@@ -14,10 +14,15 @@
             Root = null;
             Comparer = Comparer<T>.Default;
         }
-        //public Tree(Node<T>? root) :this(root, Comparer<T>.Default)
-        //{
+        public Tree(Node<T>? root) : this(root, Comparer<T>.Default)
+        {
 
-        //}
+        }
+        public Tree(IComparer<T> comparer)
+        {
+            Root = null;
+            Comparer = comparer;
+        }
         public Tree(Node<T> root, IComparer<T> comparer)
         {
             Root = root;
@@ -34,25 +39,7 @@
         }
 
 
-        public Node<T>? Search(T data)
-        {
-            Node<T> current = Root;
-            while (current != null)
-            {
-                int compared = Comparer.Compare(data, current.Data);
-
-                if (compared < 0)
-                    current = current.Left;
-                else if (compared > 0)
-                    current = current.Right;
-                else
-                    return current;
-
-            }
-
-            return current;
-        }
-
+     
         public Node<T> Maximum()
         {
             return Root?.Maximum();
@@ -61,6 +48,18 @@
         public Node<T> Minimum()
         {
             return Root?.Minimum();
+        }
+
+        public Node<T> Search(Node<T> node,T value)
+        {
+            int compared = Comparer.Compare(node.Data, value);
+            if (node == null || compared == 0)
+                return node;
+
+            if (compared > 0)
+                return Search(node.Right, value);
+
+            return Search(node.Left, value);
         }
 
         
@@ -159,11 +158,13 @@
 
             if (baseCase)
             {
+                node.Parent.UpdateCount();
                 Rebalance(node.Parent);
                 return node.Parent;
             }
             else
             {
+                node.UpdateCount();
                 Rebalance(node);
                 return node;
             }
@@ -179,10 +180,10 @@
                 return;
             }
 
-            Insert(Root, data);
+            insert(Root, data);
         }
 
-        public void Insert(Node<T> node, T value)
+        private void insert(Node<T> node, T value)
         {
             int compared = Comparer.Compare(node.Data, value);
 
@@ -191,19 +192,20 @@
                 if (node.Right == null)
                     node.Right = new Node<T>(node, value);
                 else
-                    Insert(node.Right, value);
+                    insert(node.Right, value);
             }
             else if (compared < 0)
             {
                 if (node.Left == null)
                     node.Left = new Node<T>(node, value);
                 else
-                    Insert(node.Left, value);
+                    insert(node.Left, value);
             }
             else
                 throw new Exception("Item exists");
 
             Rebalance(node);
+            node.UpdateCount();
 
         }
 
@@ -329,6 +331,8 @@
             {
                 replacer.Parent = node.Parent;
             }
+
+            Rebalance(node);
         }
 
     }

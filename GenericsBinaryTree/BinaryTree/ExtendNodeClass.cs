@@ -14,17 +14,33 @@
         public static int Depth<T>(this Node<T> tree)
         {
 
-            if (tree != null)
+            if (tree == null)
+                return -1;
+            else
             {
                 int x = Depth(tree.Left);
                 int y = Depth(tree.Right);
                 if (x > y)
-                    return x + 1;
+                    return (x + 1);
                 else
-                    return y + 1;
+                    return (y + 1);
             }
-            return 0;
         }
+        public static void UpdateCount<T>(this Node<T> node)
+        {
+            while(node != null)
+            {
+                int leftCount = node.Left?.Count ?? 0;
+                int rightCount = node.Right?.Count ?? 0;
+
+                node.Count = leftCount + rightCount + 1;
+
+                node = node.Parent;
+            }
+        }
+       
+
+
 
         public static Node<T> Minimum<T>(this Node<T> tree)
         {

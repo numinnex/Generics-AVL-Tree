@@ -12,7 +12,7 @@ namespace GenericsBinaryTree.BinaryTree
     public class Node<T>
     {
         public T Data { get; set; }
-
+        public int Count { get; set; } = 1;
         public Node(T data)
         {
             Data = data;

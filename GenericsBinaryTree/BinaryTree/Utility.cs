@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,8 +26,6 @@ namespace GenericsBinaryTree.BinaryTree
             return CreateFromMultipleNodes(NodesArray, 0 , NodesArray.Count - 1);
         }
 
-       
-
 
         private static Node<T>? CreateFromMultipleNodes<T>(IList<Node<T>> NodesArray, int start , int end)
         {
@@ -37,7 +36,13 @@ namespace GenericsBinaryTree.BinaryTree
             Node<T> node = NodesArray[mid];
 
             node.Left = CreateFromMultipleNodes(NodesArray, start, mid - 1);
+            if (node.Left != null)
+                node.Left.Parent = node;
+
+
             node.Right = CreateFromMultipleNodes(NodesArray, mid + 1, end);
+            if (node.Right != null)
+                node.Right.Parent = node;
 
 
             return node;
