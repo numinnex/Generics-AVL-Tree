@@ -63,6 +63,114 @@
             return Root?.Minimum();
         }
 
+        
+        public void Delete(T value)
+        {
+            if (Root == null)
+                throw new Exception("Empty tree");
+
+            delete(Root, value);
+        }
+
+
+        private Node<T> delete (Node<T> node , T value)
+        {
+            bool baseCase = false;
+            int compared = Comparer.Compare(node.Data, value);
+
+            if (compared > 0)
+            {
+                if (node.Right == null)
+                    throw new Exception("Item doesnt exist");
+
+                delete(node.Right, value);
+            }
+            else if (compared < 0)
+            {
+                if (node.Left == null)
+                    throw new Exception("Item doesnt exist");
+
+                delete(node.Left, value);
+            }
+            else
+            {
+                if(node.isLeaf)
+                {
+                    if (node.Parent == null)
+                        Root = null;
+                    else if (node.Parent.Left == node)
+                        node.Parent.Left = null;
+                    else
+                        node.Parent.Right = null;
+
+                    baseCase = true;
+
+                }
+                else
+                {
+                    if(node.Left != null && node.Right == null)
+                    {
+                        if (node.Parent == null)
+                        {
+                            Root.Left.Parent = null;
+                            Root = Root.Left;
+                        }
+                        else
+                        {
+                            if (node.Parent.Left == node)
+                                node.Parent.Left = node.Left;
+                            else
+                                node.Parent.Right = node.Left;
+
+                            node.Left.Parent = node.Parent;
+                        }
+
+                        baseCase = true;
+                    }
+                    else if(node.Left == null && node.Right != null)
+                    {
+                        if (node.Parent == null)
+                        {
+                            Root.Right.Parent = null;
+                            Root = Root.Right;
+                        }
+                        else
+                        {
+                            if (node.Parent.Right == node)
+                                node.Parent.Left = node.Right;
+                            else
+                                node.Parent.Right = node.Right;
+
+                            node.Parent.Right = node.Parent;
+                        }
+                        baseCase = true;
+                    }
+                    else
+                    {
+                        var maxLeftNode = node.Left.Maximum();
+
+                        node.Data = maxLeftNode.Data;
+
+
+                        delete(node.Left, maxLeftNode.Data);
+                    }
+                }
+            }
+
+            if (baseCase)
+            {
+                Rebalance(node.Parent);
+                return node.Parent;
+            }
+            else
+            {
+                Rebalance(node);
+                return node;
+            }
+
+
+        }
+
         public void Insert(T data)
         {
             if (Root == null)
@@ -98,6 +206,7 @@
             Rebalance(node);
 
         }
+
         public void Rebalance(Node<T> node)
         {
             if (node == null)

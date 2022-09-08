@@ -21,6 +21,8 @@ namespace GenericsBinaryTree
             tree.Insert(30);
             tree.Insert(22);
             tree.Insert(50);
+            tree.Delete(10);
+            tree.Delete(40);
 
 
 
