@@ -8,11 +8,6 @@ namespace GenericsBinaryTree
         {
             //Node<int> root = new(4);
 
-
-            
-
-
-
             Tree<int> tree = new Tree<int>();
 
             tree.Insert(40);

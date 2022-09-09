@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace GenericsBinaryTree.BinaryTree
         {
             comparer ??= Comparer<T>.Default;
             Node<T>[] NodesArray = nodes.ToArray();
+            Array.Sort(NodesArray);
 
             Node<T>? root = CreateFromMultipleNodes(NodesArray);
             
