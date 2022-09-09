@@ -8,6 +8,17 @@ namespace GenericsBinaryTree.BinaryTree
 {
     public static class Traverse
     {
+        public static void DepthFirstSearch<T>(this Node<T>? node , Action <Node<T>>? onEnter , Action<Node<T>>? onPass, Action<Node<T>>? onExit)
+        {
+
+            onEnter.Invoke(node);
+            DepthFirstSearch(node.Left, onEnter,onPass, onExit);
+            onPass.Invoke(node);
+            DepthFirstSearch(node.Right, onEnter, onPass, onExit);
+            onExit.Invoke(node);
+
+        }
+
         public static void PostOrderTraversal<T>(this Node<T> tree, Action<Node<T>> onVisit)
         {
             if (tree != null)
