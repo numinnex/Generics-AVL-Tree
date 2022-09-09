@@ -7,7 +7,7 @@ namespace GenericsBinaryTree
         static void Main(string[] args)
         {
             //Node<int> root = new(4);
-
+            //test
             Tree<int> tree = new Tree<int>();
 
             tree.Insert(40);
